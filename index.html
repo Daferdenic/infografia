@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Del scroll al contrato — Funnel de ventas KOWEB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0D1B2A;
+    --ink-2:#132436;
+    --line:rgba(255,255,255,.10);
+    --text:#E8EEF4;
+    --muted:#8FA3B8;
+    --tofu:#48BFE3;
+    --mofu:#B5E48C;
+    --bofu:#FFB703;
+    --loop:#C77DFF;
+    --w:1080px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  body{
+    background:#060D14;
+    font-family:'IBM Plex Sans',system-ui,sans-serif;
+    color:var(--text);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:32px 16px 64px;
+  }
+
+  /* ---------- póster ---------- */
+  .poster{
+    width:var(--w);max-width:100%;
+    background:var(--ink);
+    padding:64px 56px 48px;
+    position:relative;
+    overflow:hidden;
+  }
+  /* retícula técnica de fondo */
+  .poster::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+    background-size:36px 36px;
+    pointer-events:none;
+  }
+  .poster > *{position:relative}
+
+  /* ---------- encabezado ---------- */
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--tofu);
+    display:flex;justify-content:space-between;
+    border-bottom:1px solid var(--line);
+    padding-bottom:14px;
+  }
+  h1{
+    font-family:'Archivo',sans-serif;
+    font-weight:900;font-size:82px;line-height:.92;
+    letter-spacing:-.03em;text-transform:uppercase;
+    margin:34px 0 0;
+  }
+  h1 em{font-style:normal;color:var(--bofu)}
+  .sub{
+    font-size:21px;font-weight:500;color:var(--text);
+    margin-top:18px;max-width:70ch;
+  }
+  .brief{
+    font-size:15px;color:var(--muted);line-height:1.65;
+    margin-top:12px;max-width:78ch;
+  }
+
+  /* ---------- etapas ---------- */
+  .stages{margin-top:52px;display:flex;flex-direction:column;gap:18px}
+
+  .stage{display:grid;grid-template-columns:330px 1fr;gap:22px;align-items:stretch}
+
+  .seg{position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+  .seg svg{position:absolute;inset:0;width:100%;height:100%}
+  .seg .segtxt{position:relative;padding:0 18px}
+  .seg .code{
+    font-family:'Archivo',sans-serif;font-weight:900;
+    font-size:46px;letter-spacing:-.02em;color:var(--ink);
+  }
+  .seg .name{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:.16em;text-transform:uppercase;color:rgba(13,27,42,.72);
+    margin-top:4px;
+  }
+  .seg .temp{
+    display:inline-block;margin-top:12px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    letter-spacing:.12em;text-transform:uppercase;
+    background:var(--ink);color:var(--text);
+    padding:5px 11px;border-radius:2px;
+  }
+
+  .panel{
+    background:var(--ink-2);
+    border:1px solid var(--line);
+    border-left:4px solid var(--stage);
+    padding:26px 28px 24px;
+  }
+
+  .specs{display:flex;flex-direction:column;gap:15px}
+  .spec{display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:baseline}
+  .spec dt{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+    padding-top:3px;
+  }
+  .spec dd{font-size:15.5px;line-height:1.55}
+  .spec dd b{color:var(--stage);font-weight:600}
+
+  .moment{
+    margin-top:22px;padding-top:18px;
+    border-top:1px dashed rgba(255,255,255,.14);
+  }
+  .tag{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    background:var(--stage);color:var(--ink);
+    padding:5px 12px;border-radius:2px;
+  }
+  .moment p{font-size:14.5px;line-height:1.6;color:var(--muted);margin-top:11px}
+  .moment p.push{color:var(--text);margin-top:8px}
+  .moment p.push span{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--stage);
+    margin-right:8px;
+  }
+
+  /* ---------- fidelización / bucle ---------- */
+  .loopblock{
+    --stage:var(--loop);
+    margin-top:18px;
+    display:grid;grid-template-columns:330px 1fr;gap:22px;align-items:stretch;
+  }
+  .arrowcell{display:flex;align-items:center;justify-content:center}
+  .arrowcell svg{width:100%;height:150px}
+
+  /* ---------- pie ---------- */
+  .foot{
+    margin-top:46px;padding-top:20px;
+    border-top:1px solid var(--line);
+    display:grid;grid-template-columns:1fr 1fr;gap:32px;
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+    line-height:1.85;color:var(--muted);
+  }
+  .foot h4{
+    font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--text);font-weight:600;margin-bottom:8px;
+  }
+  .foot .author{color:var(--text)}
+
+  /* ---------- responsive / impresión ---------- */
+  @media (max-width:1120px){
+    .poster{padding:40px 26px}
+    h1{font-size:52px}
+    .stage,.loopblock{grid-template-columns:1fr}
+    .seg{min-height:120px}
+    .spec{grid-template-columns:1fr;gap:4px}
+    .arrowcell svg{height:90px}
+    .foot{grid-template-columns:1fr}
+  }
+
+  @page{size:1080px 2860px;margin:0}
+  @media print{
+    body{padding:0;background:#fff}
+    .poster{width:1080px;max-width:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="poster">
+
+  <div class="eyebrow">
+    <span>KOWEB · Soluciones en Ingeniería</span>
+    <span>Ficha técnica de conversión / Pasto, Nariño</span>
+  </div>
+
+  <h1>Del scroll<br>al <em>contrato</em></h1>
+
+  <p class="sub">Cómo un estudio de desarrollo web convierte curiosos en clientes: las tres fases del embudo y los cuatro momentos de compra.</p>
+
+  <p class="brief"><strong>La marca:</strong> KOWEB diseña y desarrolla sitios web, tiendas en línea y plataformas de streaming para pymes, emprendedores y emisoras del suroccidente colombiano. Ticket promedio alto, decisión lenta y muy racional: nadie contrata un sitio web al primer clic. Por eso el embudo importa.</p>
+
+  <div class="stages">
+
+    <!-- TOFU -->
+    <div class="stage" style="--stage:var(--tofu)">
+      <div class="seg">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <polygon points="0,0 100,0 87,100 13,100" fill="#48BFE3"></polygon>
+        </svg>
+        <div class="segtxt">
+          <div class="code">TOFU</div>
+          <div class="name">Parte alta · Descubrimiento</div>
+          <div class="temp">Lead frío</div>
+        </div>
+      </div>
+      <div class="panel">
+        <dl class="specs">
+          <div class="spec"><dt>Público objetivo</dt><dd>Dueños de pymes y comerciantes de Pasto, 25 a 55 años, sin sitio web o con una página abandonada. Venden solo por WhatsApp.</dd></div>
+          <div class="spec"><dt>Intención del usuario</dt><dd>Todavía no busca proveedor: <b>reconoce un síntoma</b>. «No aparezco en Google», «mi competencia se ve más seria que yo».</dd></div>
+          <div class="spec"><dt>Tipo de contenido</dt><dd>Reels y carruseles de diagnóstico rápido, artículos con SEO local, menciones en emisoras aliadas. Mensaje educativo, cero venta.</dd></div>
+        </dl>
+        <div class="moment">
+          <span class="tag">Momento 1 · Atracción</span>
+          <p>Primer contacto con personas que aún no conocen la marca. El objetivo no es vender, es ganar visibilidad y credibilidad ante un público amplio.</p>
+          <p class="push"><span>Avance</span>Cada pieza cierra con una invitación suave —una guía gratuita— que convierte al espectador de redes en visitante del sitio.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOFU -->
+    <div class="stage" style="--stage:var(--mofu)">
+      <div class="seg">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <polygon points="13,0 87,0 74,100 26,100" fill="#B5E48C"></polygon>
+        </svg>
+        <div class="segtxt">
+          <div class="code">MOFU</div>
+          <div class="name">Parte media · Consideración</div>
+          <div class="temp">Lead tibio</div>
+        </div>
+      </div>
+      <div class="panel">
+        <dl class="specs">
+          <div class="spec"><dt>Público objetivo</dt><dd>Quien ya visitó el sitio o sigue a KOWEB y compara opciones: agencia local, freelance, plantilla de Wix o hacerlo por su cuenta.</dd></div>
+          <div class="spec"><dt>Intención del usuario</dt><dd>Quiere <b>evaluar y comparar</b>. Pregunta cuánto cuesta, cuánto demora y si de verdad funciona para un negocio como el suyo.</dd></div>
+          <div class="spec"><dt>Tipo de contenido</dt><dd>Casos de éxito con cifras, la lista «Qué revisar antes de contratar tu sitio web» a cambio del correo, comparativas honestas y un diagnóstico web gratuito.</dd></div>
+        </dl>
+        <div class="moment">
+          <span class="tag">Momento 2 · Interacción</span>
+          <p>La relación se vuelve de doble vía: el prospecto entrega sus datos y su tiempo porque recibe algo útil a cambio. Deja de ser anónimo.</p>
+          <p class="push"><span>Avance</span>El correo capturado activa una secuencia de tres mensajes, y el diagnóstico gratuito abre la conversación comercial sin presión.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOFU -->
+    <div class="stage" style="--stage:var(--bofu)">
+      <div class="seg">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <polygon points="26,0 74,0 61,100 39,100" fill="#FFB703"></polygon>
+        </svg>
+        <div class="segtxt">
+          <div class="code">BOFU</div>
+          <div class="name">Parte baja · Decisión</div>
+          <div class="temp">Lead caliente</div>
+        </div>
+      </div>
+      <div class="panel">
+        <dl class="specs">
+          <div class="spec"><dt>Público objetivo</dt><dd>Prospecto calificado: tiene presupuesto, fecha y una necesidad concreta. Ya recibió su diagnóstico y sabe qué le falta.</dd></div>
+          <div class="spec"><dt>Intención del usuario</dt><dd>Quiere <b>decidir sin equivocarse</b>. Busca precio cerrado, plazos, garantía y la certeza de que no lo dejarán solo después del pago.</dd></div>
+          <div class="spec"><dt>Tipo de contenido</dt><dd>Propuesta con alcance y cronograma, boceto real de su página de inicio, testimonios verificables, garantía de soporte y pago en cuotas.</dd></div>
+        </dl>
+        <div class="moment">
+          <span class="tag">Momento 3 · Conversión</span>
+          <p>El prospecto ejecuta la acción que sostiene el negocio: acepta la propuesta y paga el anticipo. Aquí se mide el retorno de todo lo anterior.</p>
+          <p class="push"><span>Avance</span>Ver su propio diseño antes de firmar elimina la incertidumbre; la garantía reduce el riesgo percibido y el llamado es directo: «Agenda tu reunión».</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FIDELIZACIÓN -->
+  <div class="loopblock">
+    <div class="arrowcell">
+      <svg viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <path d="M285 130 C 285 40, 150 20, 40 20" fill="none" stroke="#C77DFF" stroke-width="3" stroke-dasharray="9 7" stroke-linecap="round"/>
+        <path d="M40 20 L 58 10 L 58 30 Z" fill="#C77DFF"/>
+        <text x="150" y="118" text-anchor="middle" fill="#C77DFF" font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="2.5">EL EMBUDO SE CIERRA</text>
+        <text x="150" y="140" text-anchor="middle" fill="#8FA3B8" font-family="IBM Plex Mono, monospace" font-size="13" letter-spacing="2.5">Y VUELVE A EMPEZAR</text>
+      </svg>
+    </div>
+    <div class="panel">
+      <dl class="specs">
+        <div class="spec"><dt>Público objetivo</dt><dd>Cliente activo con sitio ya entregado. Conoce el producto, confía en el equipo y tiene contactos en su mismo gremio.</dd></div>
+        <div class="spec"><dt>Intención del usuario</dt><dd>Quiere que <b>lo entregado siga funcionando</b> y crezca: métricas, actualizaciones, respaldo y respuesta rápida cuando algo falla.</dd></div>
+        <div class="spec"><dt>Tipo de contenido</dt><dd>Plan de mantenimiento mensual, reporte de visitas, manual del sitio, capacitación al equipo y descuento por cada cliente referido.</dd></div>
+      </dl>
+      <div class="moment">
+        <span class="tag">Momento 4 · Fidelización</span>
+        <p>La venta no cierra el ciclo, lo reinicia. Se sostiene y amplía la relación para que el cliente compre otra vez y, sobre todo, recomiende.</p>
+        <p class="push"><span>Avance</span>El cliente satisfecho reingresa al embudo por servicios nuevos y alimenta el TOFU con recomendaciones: el embudo se convierte en rueda.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div>
+      <h4>Referencias</h4>
+      Giraldo Oliveros, M. E., Ortiz Velásquez, M. &amp; Castro Abello, M. D. (2021). <em>Marketing: una versión gráfica</em>. Universidad del Norte.<br>
+      Lizano Lescano, E. A. (2022). Estrategias de marketing para mejorar el embudo de conversión de ventas: una revisión sistemática. <em>Journal of Science and Research, 7</em>(3), 165–189.<br>
+      Pukkas Web Design S.L. (2024). <em>24 tendencias de marketing digital</em>.
+    </div>
+    <div>
+      <h4>Ficha</h4>
+      <span class="author">David Fernando Delgado Nichoy · ID 1141828</span><br>
+      NRC 93950 · Posicionamiento de Marca en Medios Digitales<br>
+      Docente: Sean Igor Acosta Díaz · Semana 5<br>
+      Corporación Universitaria Minuto de Dios — UNIMINUTO<br>
+      Pasto, Nariño · 2026
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
